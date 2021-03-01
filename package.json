@@ -1,0 +1,26 @@
+{
+  "name": "daemon",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balkanimes/daemon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/balkanimes/daemon/issues"
+  },
+  "homepage": "https://github.com/balkanimes/daemon#readme",
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "node-fetch": "^2.6.1"
+  }
+}
