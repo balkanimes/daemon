@@ -22,7 +22,7 @@ const query = `
 `;
 
 export function loadConfig() {
-  return fetch(process.env.API_ENDPOINT, {
+  return fetch(process.env.HEHDON_ENDPOINT ?? 'http://localhost:4000/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
