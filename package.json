@@ -13,8 +13,8 @@
     "url": "git+https://github.com/balkanimes/daemon.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Clément Dubreuil",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/balkanimes/daemon/issues"
   },
