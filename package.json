@@ -21,6 +21,7 @@
   "homepage": "https://github.com/balkanimes/daemon#readme",
   "dependencies": {
     "ansi-colors": "^4.1.1",
+    "ioredis": "^4.23.0",
     "node-fetch": "^2.6.1"
   }
 }

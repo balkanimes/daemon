@@ -1,13 +1,12 @@
 import path from 'path';
 
+import redis from './redis.js';
 import loadConfig from './config.js';
 import Logger from './logger.js';
 import { move, numberFromEnv } from './helper.js';
 
 import DummyProvider from './provider/dummy.js';
 import DummyDownloader from './downloader/dummy.js';
-
-Logger.level = Logger.DEBUG;
 
 export class Kernel {
   static interval = numberFromEnv('HEHDON_INTERVAL', 3600) * 1000;
@@ -19,14 +18,17 @@ export class Kernel {
 
   logger = new Logger();
 
-  loadDefaults() {
+  loadDebug() {
+    Logger.level = Logger.DEBUG;
     this.providers.push(DummyProvider);
     this.downloaders.push(DummyDownloader);
   }
 
-  loadDebug() {
-    this.providers.push(DummyProvider);
-    this.downloaders.push(DummyDownloader);
+  async loadSchema() {
+    for (const provider of this.providers) {
+      await redis.set(`hehdon:provider:${provider.slug}`, JSON.stringify(provider.schema));
+    }
+    await redis.set('hehdon:provider', JSON.stringify(this.providers.map(p => p.slug)));
   }
 
   async update() {
