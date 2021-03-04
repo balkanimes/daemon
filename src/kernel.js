@@ -33,7 +33,14 @@ export class Kernel {
 
   async update() {
     this.logger.debug('Start update');
-    const config = await loadConfig();
+
+    let config;
+    try {
+      config = await loadConfig();
+    } catch (e) {
+      this.logger.error(e);
+      return;
+    }
 
     for (const entry of config) {
       const logger = this.logger.extends(Logger.c.blue(`[${entry.name}]`));
