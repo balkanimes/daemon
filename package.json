@@ -1,8 +1,7 @@
 {
-  "name": "daemon",
-  "version": "1.0.0",
+  "name": "@balkanimes/daemon",
+  "version": "0.1.0",
   "description": "",
-  "private": true,
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -17,6 +16,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/balkanimes/daemon/issues"
+  },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
   },
   "homepage": "https://github.com/balkanimes/daemon#readme",
   "dependencies": {

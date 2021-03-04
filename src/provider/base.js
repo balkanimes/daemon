@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-class Base {
+export class Base {
   constructor({ config, logger, root }) {
     this._config = config;
     this.config = config.mergedConfig;
