@@ -19,7 +19,7 @@ export class Dummy extends Base {
       name: 'asJSON',
       type: 'boolean',
       description: 'Interpret the payload as a JSON value',
-      default: false,
+      default: "false",
     },
   ];
   

@@ -1,39 +1,39 @@
-import fetch from 'node-fetch';
+import { GraphQLClient, gql } from 'graphql-request';
 
-const query = `
-{
-  entries {
-    name
-    pipeline {
-      name
-      provider
-      config
-    }
-    directory
-    config
-    filter {
-      start
-      end
-      includes
-      excludes
-    }
-  }
-}
-`;
+const client = new GraphQLClient(process.env.HEHDON_ENDPOINT ?? 'http://localhost:4000/');
 
 export function loadConfig() {
-  return fetch(process.env.HEHDON_ENDPOINT ?? 'http://localhost:4000/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ query }),
-  })
-    .then(r => r.json())
-    .then(d => d.data.entries.map(v => ({
-      ...v,
-      mergedConfig: Object.assign({}, v.pipeline.config,v.config)
-    })));
+  return client.request(gql`
+    {
+      entries {
+        name
+        pipeline {
+          name
+          provider
+          config
+        }
+        directory
+        config
+        filter {
+          start
+          end
+          includes
+          excludes
+        }
+      }
+    }
+  `).then(data => data.entries.map(v => ({
+    ...v,
+    mergedConfig: Object.assign({}, v.pipeline.config,v.config)
+  })));
+}
+
+export function setProviders(providers) {
+  return client.request(gql`
+    mutation setProviders($providers: [SchemaInput!]!) {
+      providers(c: $providers)
+    }
+  `, { providers });
 }
 
 export default loadConfig;

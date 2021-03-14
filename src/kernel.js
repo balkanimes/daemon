@@ -1,7 +1,6 @@
 import path from 'path';
 
-import redis from './redis.js';
-import loadConfig from './config.js';
+import { loadConfig, setProviders } from './config.js';
 import Logger from './logger.js';
 import { move, numberFromEnv } from './helper.js';
 
@@ -24,11 +23,11 @@ export class Kernel {
     this.downloaders.push(DummyDownloader);
   }
 
-  async loadSchema() {
-    for (const provider of this.providers) {
-      await redis.set(`hehdon:provider:${provider.slug}`, JSON.stringify(provider.schema));
-    }
-    await redis.set('hehdon:provider', JSON.stringify(this.providers.map(p => p.slug)));
+  loadSchema() {
+    return setProviders(this.providers.map(p => ({
+      name: p.slug,
+      schema: p.schema,
+    })));
   }
 
   async update() {
